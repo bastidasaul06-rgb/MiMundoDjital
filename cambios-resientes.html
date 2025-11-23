@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambios resientes</title>
+    <style>
+        body.alto-contraste {
+            background-color: black;
+            color: yellow;
+        }
+        .accesibilidad-menu button {
+            margin: 5px;
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="accesibilidad-menu" style="text-align:center; margin-bottom:20px;">
+        <button onclick="alternarContraste()">Alto contraste</button>
+        <button onclick="alternarModoOscuro()">Modo oscuro</button>
+    </div>
+
+    <a href="PajinaJeneral.html">Regresar a la página principal</a>
+    <h1>Cambios resientes</h1>
+    <p>Aquí encontrarás los cambios que se vayan realizando en pájina, serbidor, base de datos etc.</p>
+    <p>Por el momento:</p>
+
+    <h2>Cambios recientes en la página</h2>
+    <h3>Última actualización: 21 de noviembre de 2025</h3>
+    <p>Hola. Aquí te cuento algunas cosas nuevas que he estado ajustando en la página. Poco a poco va tomando más forma.</p>
+
+    <h3>Estilo y diseño</h3>
+    <ul>
+        <li>Se mejoró la tipografía para que sea más legible en pantallas pequeñas.</li>
+        <li>Agregué un pequeño logo en la sección de juegos.</li>
+        <li>Los botones ahora tienen bordes más redondeados y un efecto al pasar el cursor.</li>
+    </ul>
+
+    <h3>Nuevas funciones</h3>
+    <ul>
+        <li>Se agregó la página de <a href="juegos.html">juegos</a>, con un área dedicada a varios mini-juegos.</li>
+        <li>En el juego de adivinanzas ahora se muestra un mensaje accesible para lectores de pantalla.</li>
+        <li>Se añadió un botón para ir directo a jugar desde la publicación de juegos.</li>
+    </ul>
+
+    <p>en algunos juegos el contenido aún no está disponible. aora que tenga un poco mas de tiepo los completo: m</p>
+    <h3>Organización</h3>
+    <ul>
+        <li>Separé los juegos en secciones con identificadores para poder enlazarlos desde el índice.</li>
+        <li>Se creó una carpeta exclusiva para los archivos de juegos.</li>
+    </ul>
+
+    <h3>Comentarios</h3>
+    <ul>
+        <li>Ahora los comentarios se guardan en un archivo temporal, aunque todavía no se comparten públicamente.</li>
+        <li>Estoy probando un sistema de notificaciones internas para avisar cuando hay cambios en la página.</li>
+    </ul>
+
+    <h2>Antes</h2>
+    <h3>Actualización anterior: 15 de noviembre de 2025</h3>
+    <h4>Estilo y diseño</h4>
+    <ul>
+        <li>Se agregó el modo oscuro.</li>
+        <li>Cambié los colores del botón de accesibilidad porque el verde estaba muy fuerte.</li>
+        <li>Ajusté los márgenes para que no se vea todo tan apretado.</li>
+    </ul>
+
+    <h4>Nuevas funciones</h4>
+    <ul>
+        <li>Menú de accesibilidad desplegable con opciones para aumentar texto, activar contraste y restablecer tamaño.</li>
+        <li>Se agregó un buscador por palabras clave.</li>
+        <li>Filtro por categorías para encontrar contenido más fácil.</li>
+    </ul>
+
+    <h4>Organización</h4>
+    <ul>
+        <li>Separé los estilos y scripts en carpetas.</li>
+        <li>Preparé el terreno para subir el sitio a GitHub.</li>
+    </ul>
+
+    <h4>Comentarios</h4>
+    <ul>
+        <li>Se creó una sección de comentarios, aunque por ahora solo tú puedes ver lo que escribes.</li>
+        <li>Planeo usar una base de datos gratuita, veremos qué sucede.</li>
+    </ul>
+
+    <p>Si ves algo raro o tienes ideas, me encantaría saberlo. Gracias por visitar y estar aquí.</p>
+    <a href="PajinaJeneral.html">Regresar a la página principal</a>
+
+    <script>
+        function alternarContraste() {
+            document.body.classList.toggle("alto-contraste");
+        }
+
+        function alternarModoOscuro() {
+            document.body.style.backgroundColor =
+                document.body.style.backgroundColor === "rgb(20, 20, 20)" ? "white" : "#141414";
+            document.body.style.color =
+                document.body.style.color === "white" ? "black" : "white";
+        }
+    </script>
+
+    <p>© 2025 Página Saúl. Todos los contenidos están protegidos por la licencia 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
+        Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional
+        </a>.
+        Puedes compartir el contenido siempre que se reconozca la autoría, no se utilice con fines comerciales y no se modifique ni mezcle.
+    </p>
+    <p>Puedes.</p>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
+        Ver términos de la licencia Creative Commons BY-NC-ND 4.0
+    </a>
+
+</body>
+</html>
