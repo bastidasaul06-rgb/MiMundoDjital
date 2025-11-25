@@ -3,169 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pájina personál de Saúl</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 20px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .hora {
-      font-size: 1.2em;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .modo-btn {
-      display: block;
-      margin: 40px auto;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 6px;
-      border: none;
-      background-color: #00796b;
-      color: white;
-      cursor: pointer;
-    }
-
-    .modo-btn:hover {
-      background-color: #004d40;
-    }
-
-    .oscuro {
-      background-color: #121212;
-      color: #f0f0f0;
-    }
-
-    .oscuro .modo-btn {
-      background-color: #f0f0f0;
-      color: #121212;
-    }
-
-    .oscuro .modo-btn:hover {
-      background-color: #cccccc;
-    }
-
-    .accesibilidad-toggle {
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 6px;
-      border: none;
-      background-color: #00796b;
-      color: white;
-      cursor: pointer;
-    }
-
-    .accesibilidad-menu button {
-      display: block;
-      margin: 10px auto;
-      padding: 8px 16px;
-      font-size: 0.9em;
-      border-radius: 5px;
-      border: none;
-      background-color: #e0e0e0;
-      cursor: pointer;
-    }
-
-    .alto-contraste {
-      background-color: black !important;
-      color: yellow !important;
-    }
-
-    body.alto-contraste a {
-      color: cyan !important;
-    }
-  </style>
+  <title>Pájina personál de Saúl</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-  <div class="hora" id="horaActual"></div>
+  <header>
+    <div class="hora" id="horaActual"></div>
+    <img src="una guitarra acústic.png" alt="Logo de la página" width="200" height="200" style="display:block; margin: 0 auto;">
 
-  <img src="una guitarra acústic.png" alt="Logo de la página" width="200" height="200" style="display:block; margin: 0 auto;">
+    <nav>
+      <ul style="text-align:center; list-style:none; padding:0; margin-top:20px;">
+        <li style="display:inline; margin:0 10px;"><a href="#habilidades">Habilidades</a></li>
+        <li style="display:inline; margin:0 10px;"><a href="#cambios">Cambios recientes</a></li>
+        <li style="display:inline; margin:0 10px;"><a href="#blog">Blog</a></li>
+        <li style="display:inline; margin:0 10px;"><a href="#contenido">Contenido</a></li>
+        <li style="display:inline; margin:0 10px;"><a href="#publicaciones">Publicaciones</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div class="accesibilidad-container" style="margin-top: 30px; text-align: center;">
-    <button class="accesibilidad-toggle" onclick="toggleAccesibilidad()">🔧 Accesibilidad</button>
-    <div class="accesibilidad-menu" id="accesibilidadMenu" style="display: none; margin-top: 10px;">
-      <button onclick="aumentarTexto()">Aumentar texto</button>
-      <button onclick="disminuirTexto()">Disminuir texto</button>
-      <button onclick="restablecerTexto()">Restablecer tamaño</button>
-      <button onclick="alternarContraste()">Alto contraste</button>
-    </div>
-  </div>
+  <main>
+    <section>
+      <div class="accesibilidad-container" style="margin-top: 30px; text-align: center;">
+        <button class="accesibilidad-toggle" onclick="toggleAccesibilidad()">Accesibilidad</button>
+        <div class="accesibilidad-menu" id="accesibilidadMenu" style="display: none; margin-top: 10px;">
+          <button onclick="aumentarTexto()">Aumentar texto</button>
+          <button onclick="disminuirTexto()">Disminuir texto</button>
+          <button onclick="restablecerTexto()">Restablecer tamaño</button>
+          <button onclick="alternarContraste()">Alto contraste</button>
+        </div>
+      </div>
+    </section>
 
-  <h1>bien¡benidos!</h1>
-  <p>Soy músico, programador y estudiante ciego. Me gusta crear cosas, ya sea con sonidos o con líneas de código. A veces compongo, otras veces escribo programas, y muchas veces hago las dos cosas al mismo tiempo. Me gusta aprender, experimentar y compartir lo que voy descubriendo en el camino: Este espacio es un poco de todo eso.</p>
+    <section>
+      <h1>bien¡benidos!</h1>
+      <p>Soy músico, programador y estudiante ciego. Me gusta crear cosas, ya sea con sonidos o con líneas de código. A veces compongo, otras veces escribo programas, y muchas veces hago las dos cosas al mismo tiempo. Me gusta aprender, experimentar y compartir lo que voy descubriendo en el camino: Este espacio es un poco de todo eso.</p>
+    </section>
 
-  <h2>Mis habilidades por área</h2>
-  <table border="1" style="width:100%; text-align:center; border-collapse: collapse; margin-top:20px;">
-    <thead style="background-color:#00796b; color:white;">
-      <tr>
-        <th>Área</th>
-        <th>Herramientas / Habilidades</th>
-        <th>Nivel</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Música</td>
-        <td>Guitarra acústica, composición, grabación y produciónmusical</td>
-        <td>Avanzado</td>
-      </tr>
-      <tr>
-        <td>Programación</td>
-        <td>HTML, CSS, JavaScript, c++, nvgt, bgt y lua</td>
-        <td>Intermedio</td>
-      </tr>
-      <tr>
-        <td>Escolares</td>
-        <td>Lectura en braille, investigación, redacción</td>
-        <td>Avanzado</td>
-      </tr>
-    </tbody>
-  </table>
+    <section id="habilidades">
+      <h2>Mis habilidades por área</h2>
+      <table border="1" style="width:100%; text-align:center; border-collapse: collapse; margin-top:20px;">
+        <thead>
+          <tr>
+            <th>Área</th>
+            <th>Herramientas / Habilidades</th>
+            <th>Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Música</td>
+            <td>Guitarra acústica, composición, grabación y produción musical</td>
+            <td>Avanzado</td>
+          </tr>
+          <tr>
+            <td>Programación</td>
+            <td>HTML, CSS, JavaScript, C++, NVGT, BGT y Lua</td>
+            <td>Intermedio</td>
+          </tr>
+          <tr>
+            <td>Escolares</td>
+            <td>Lectura en braille, investigación, redacción</td>
+            <td>Avanzado</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-  <h2>cambios resientes en la pájina.</h2>
-  <a href="cambios-resientes.html" target="_blank" rel="noopener noreferrer">Ver cambios recientes</a>
+    <section id="cambios">
+      <h2>Cambios resientes en la pájina</h2>
+      <a href="cambios-resientes.html" target="_blank" rel="noopener noreferrer">Ver cambios recientes</a>
+    </section>
 
-  <h2>blok</h2>
-  <a href="blog.html" target="_blank" rel="noopener noreferrer">Ir al blog</a>
+    <section id="blog">
+      <h2>Blog</h2>
+      <a href="blog.html" target="_blank" rel="noopener noreferrer">Ir al blog</a>
+    </section>
 
-  <h3>contenido</h3>
-  <p>mas abajo encontrarás un menú para filtar por categoría el contenido que baya subiendo.</p>
+    <section id="contenido">
+      <h3>Contenido</h3>
+      <p>Más abajo encontrarás un menú para filtrar por categoría el contenido que vaya subiendo.</p>
 
-  <div class="menu-container">
-    <label for="filtro">Filtrar por categoría:</label>
-    <select id="filtro" name="filtro">
-      <option value="">-- Selecciona una opción --</option>
-      <option value="musica">🎵 Música</option>
-      <option value="programacion">💻 Programación</option>
-      <option value="escolares">📚 Escolares</option>
-      <option value="arte">🎨 Arte</option>
-      <option value="otros">✨ Otros</option>
-    </select>
-  </div>
+      <div class="menu-container">
+        <label for="filtro">Filtrar por categoría:</label>
+        <select id="filtro" name="filtro">
+          <option value="">-- Selecciona una opción --</option>
+          <option value="musica">🎵 Música</option>
+          <option value="programacion">💻 Programación</option>
+          <option value="escolares">📚 Escolares</option>
+          <option value="arte">🎨 Arte</option>
+          <option value="otros">✨ Otros</option>
+        </select>
+      </div>
 
-  <p>o si lo prefieres. <br>busca por palabras clabes aquí.</p>
-  <div class="buscador">
-    <label for="buscar">Buscar publicaciones:</label><br>
-    <input type="text" id="buscar" name="buscar" placeholder="Escribe palabras clave..." aria-label="Buscar publicaciones"><br><br>
-    <button type="submit">Buscar</button>
-  </div>
+      <p>O si lo prefieres:<br>Busca por palabras clave aquí.</p>
+      <div class="buscador">
+        <label for="buscar">Buscar publicaciones:</label><br>
+        <input type="text" id="buscar" name="buscar" placeholder="Escribe palabras clave..." aria-label="Buscar publicaciones"><br><br>
+        <button id="btnBuscar">Buscar</button>
+      </div>
 
-  <div id="resultados" style="margin-top: 20px;"></div>
+      <div id="resultados" style="margin-top: 20px;"></div>
+    </section>
 
-  <h3>publicasiones.</h3>
-  <ul>
-<li><a href="PublicasionAreaDeJuegos.html" target="_blank" rel="noopener noreferrer">🎮 Leer la publicación sobre juegos</a></li>
-<li><a href="PrimerPublicasion.html" target="_blank" rel="noopener noreferrer">📖 Leer mi primera publicación</a></li>
-<li></li>
-<li></li>
-  </ul>
+    <section id="publicaciones">
+      <h3>Publicaciones</h3>
+      <ul>
+<li><a href="dominio.html" target="_blank" rel="noopener noreferrer">🌐 Leer publicación sobre GitHub</a></li>
+        <li><a href="PublicasionAreaDeJuegos.html" target="_blank" rel="noopener noreferrer">🎮 Leer la publicación sobre juegos</a></li>
+        <li><a href="PrimerPublicasion.html" target="_blank" rel="noopener noreferrer">📖 Leer mi primera publicación</a></li>
+        
+      </ul>
+    </section>
+  </main>
+
   <button class="modo-btn" onclick="cambiarModo()">Cambiar modo claro/oscuro</button>
 
-  <footer style="background-color:#f2f2f2; padding:20px; text-align:center; font-size:14px;">
+  <footer>
     <h4>Página Saúl</h4>
     <p>© 2025 Página Saúl. Todos los contenidos están protegidos por la licencia 
       <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
@@ -173,10 +128,10 @@
       </a>.
       Puedes compartir el contenido siempre que se reconozca la autoría, no se utilice con fines comerciales y no se modifique ni mezcle.
     </p>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
+      Ver términos de la licencia Creative Commons BY-NC-ND 4.0
+    </a>
   </footer>
-  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
-    Ver términos de la licencia Creative Commons BY-NC-ND 4.0
-  </a>
 
   <script>
     let tamañoActual = 1;
@@ -218,6 +173,26 @@
       document.body.classList.toggle('oscuro');
     }
 
-    document.querySelector("button[type='submit']").addEventListener("click", function () {
+    document.getElementById("btnBuscar").addEventListener("click", function () {
       const palabraClave = document.getElementById("buscar").value.toLowerCase();
-      const categoria = 
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";
+
+      if (palabraClave.includes("juego")) {
+        resultados.innerHTML += '<p><a href="PublicasionAreaDeJuegos.html" target="_blank">Publicación sobre juegos</a></p>';
+      }
+      if (palabraClave.includes("primera")) {
+        resultados.innerHTML += '<p><a href="PrimerPublicasion.html" target="_blank">Primera publicación</a></p>';
+      }
+      if (palabraClave.includes("github")) {
+        resultados.innerHTML += '<p><a href="PublicasionGitHub.html" target="_blank">Publicación sobre GitHub</a></p>';
+      }
+            if (resultados.innerHTML === "") {
+        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+      }
+    });
+  </script>
+
+  
+</body>
+</html>
