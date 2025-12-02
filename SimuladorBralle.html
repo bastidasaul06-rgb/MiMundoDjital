@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Simulador & Traductor Braille — Visual mejorada</title>
+<style>
+  /* === Tema y escala === */
+  :root{
+    --bg:#071019;                 /* fondo oscuro solicitado */
+    --panel:#08121a;
+    --card:#0b1720;
+    --text:#e6eef5;
+    --muted:#9fb3c6;
+    --accent:#14a2a0;             /* color activo (turquesa más oscuro) */
+    --accent-strong:#06a0a0;
+    --dot-size:38px;              /* base dot size */
+    --dot-gap:14px;
+    --dot-active-scale:1.5;       /* escala visual cuando activo */
+    --dot-border:3px;
+    --radius:12px;
+    --maxw:980px;
+    --glass: rgba(255,255,255,0.02);
+    --focus: 3px solid rgba(20,162,160,0.12);
+  }
+
+  /* Dark mode baseline */
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;background:linear-gradient(180deg,var(--panel),#061017);border-radius:var(--radius);box-shadow:0 20px 60px rgba(2,6,10,0.6);border:1px solid rgba(255,255,255,0.02)}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .brand{font-weight:700;font-size:18px;color:var(--text)}
+  .by{color:var(--muted);font-size:13px}
+
+  /* Cards */
+  .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  h2{margin:6px 0 10px;font-size:18px;color:var(--text)}
+  p{margin:8px 0;color:var(--muted);line-height:1.5}
+
+  .highlight{display:inline-block;padding:4px 8px;border-radius:8px;background:rgba(20,162,160,0.08);font-weight:600;color:var(--text)}
+
+  /* Layout */
+  main{display:grid;grid-template-columns:1fr 340px;gap:18px}
+  @media (max-width:980px){ main{grid-template-columns:1fr} }
+
+  /* Switch box */
+  .switch-box{display:flex;gap:8px;margin-bottom:12px}
+  .switch-btn{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);cursor:pointer}
+  .switch-btn.active{background:linear-gradient(90deg,var(--accent-strong),#0fbfbf);color:#021010;border:none;box-shadow:0 10px 30px rgba(6,160,160,0.12)}
+
+  /* Simulator grid: más separación y puntos más distintivos */
+  .simulator{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+  .braille-grid{
+    display:grid;
+    grid-template-columns:repeat(2, var(--dot-size));
+    grid-template-rows:repeat(3, var(--dot-size));
+    gap:var(--dot-gap);
+    align-items:center;
+    justify-items:center;
+    padding:14px;
+    border-radius:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+    border:1px solid rgba(255,255,255,0.02);
+  }
+
+  .dot{
+    width:var(--dot-size);
+    height:var(--dot-size);
+    border-radius:50%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s, background-color .18s;
+    position:relative;
+    border: 1px solid rgba(255,255,255,0.03);
+    outline: none;
+  }
+
+  /* estado inactivo (más tenue) */
+  .dot.inactive{
+    background: linear-gradient(180deg,#0b2230,#071418);
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.6);
+    opacity:0.45;
+  }
+
+  /* estado activo: más grande, glow y borde */
+  .dot.active{
+    transform: scale(var(--dot-active-scale));
+    background: radial-gradient(circle at 30% 30%, #31c7c6 0%, var(--accent) 40%);
+    box-shadow:
+      0 10px 30px rgba(6,160,160,0.28),
+      inset 0 -6px 14px rgba(0,0,0,0.25);
+    border: var(--dot-border) solid rgba(255,255,255,0.06);
+    opacity:1;
+    z-index:2;
+  }
+
+  /* highlight ring using pseudo-element for large active visual */
+  .dot.active::after{
+    content:'';
+    position:absolute;
+    inset:auto;
+    left:50%; top:50%;
+    width:calc(var(--dot-size) * 1.6);
+    height:calc(var(--dot-size) * 1.6);
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    box-shadow:0 0 30px rgba(20,162,160,0.18);
+    z-index:-1;
+    pointer-events:none;
+  }
+
+  /* keyboard focus visible */
+  .dot:focus{ box-shadow: var(--focus); border-radius:50%; }
+
+  .dot-label{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+
+  .controls-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);cursor:pointer}
+
+  /* Translator */
+  textarea,input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);resize:vertical;background:#071419;color:var(--text)}
+  .braille-output{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+  /* Right column small cards */
+  aside .card{margin-bottom:12px}
+
+  /* footer small */
+  footer{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="wrap" role="main" aria-labelledby="mainTitle">
+    <header>
+      <div>
+        <div id="mainTitle" class="brand">Simulador & Traductor Braille — Visual mejorada</div>
+        <div class="by">Creado por <strong>Saúl Iturbe Bastida</strong></div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="card">
+          <h2>Vista</h2>
+          <div class="switch-box" role="tablist" aria-label="Cambiar vista">
+            <button class="switch-btn active" id="viewSimulatorBtn" role="tab" aria-selected="true">Simulador</button>
+            <button class="switch-btn" id="viewTranslatorBtn" role="tab" aria-selected="false">Traductor</button>
+          </div>
+
+          <div id="panelArea">
+            <!-- panel inicial renderizado por JS -->
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Ayuda</h2>
+          <details open>
+            <summary>Ayuda con el traductor</summary>
+            <p class="small">Escribe texto (a–z, números). Pulsa <strong>Traducir</strong>. Se representará en celdas visuales. Copia o descarga desde los botones.</p>
+          </details>
+
+          <details>
+            <summary>Ayuda con el simulador de escritura</summary>
+            <p class="small">Haz clic en puntos para activar/desactivar. Usa teclas <kbd>1</kbd>–<kbd>6</kbd> para atajos. Pulsa <strong>Confirmar carácter</strong> para añadir a la salida. Enter confirma. Ctrl+Z deshace.</p>
+          </details>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3>Información</h3>
+          <p class="small">Autor: Saúl Iturbe Bastida — Interfaz visual mejorada (puntos activos grandes y con glow para distinguir claramente).</p>
+        </div>
+
+        <div class="card">
+          <h3>Accesibilidad</h3>
+          <p class="small">Navegación por teclado: Tab/Shift+Tab. Foco visible en puntos y botones. Lectura por síntesis si el navegador lo soporta.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <small>Versión visual mejorada — puntos activos más grandes y más distingibles.</small>
+    </footer>
+  </div>
+
+<script>
+/* --- Braille mapping (grado 1) --- */
+const BRAILLE_MAP = (function(){
+  const m = {};
+  const patterns = {
+    a: 1,    b: 3,    c: 9,    d: 25,   e: 17,
+    f: 11,   g: 27,   h: 19,   i: 10,   j: 26,
+    k: 5,    l: 7,    m: 13,   n: 29,   o: 21,
+    p: 15,   q: 31,   r: 23,   s: 14,   t: 30,
+    u: 37,   v: 39,   w: 58,   x: 45,   y: 61,   z: 53
+  };
+  for(const k in patterns) m[k]=patterns[k];
+  m[' '] = 0; m[',']=2; m['.']=50; m['?']=34; m['!']=58;
+  return m;
+})();
+
+/* Utilities */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+function announce(msg){ const id='ariaLive2'; let d=document.getElementById(id); if(!d){ d=document.createElement('div'); d.id=id; d.className='sr-only'; d.setAttribute('aria-live','polite'); d.style.position='absolute'; d.style.left='-9999px'; document.body.appendChild(d);} d.textContent=msg; }
+
+/* State */
+let simState = { mask:0, history:[], future:[] };
+
+/* Render panels */
+const panelArea = document.getElementById('panelArea');
+
+function renderSimulatorPanel(){
+  panelArea.innerHTML = `
+    <div class="card">
+      <h2>Simulador táctil</h2>
+      <p class="small">Haz clic en los puntos o usa teclas 1–6. Pulsa <strong>Confirmar carácter</strong>.</p>
+      <div class="simulator" aria-label="Simulador braille">
+        <div>
+          <div class="braille-grid" id="simGrid" role="grid" aria-label="Celda braille"></div>
+          <div class="dot-label small" style="margin-top:8px">Lectura: arriba→abajo, izquierda→derecha</div>
+          <div class="controls-row">
+            <button class="btn" id="confirmCharBtn">Confirmar carácter</button>
+            <button class="btn" id="undoBtn">Deshacer</button>
+            <button class="btn" id="readBtn">Leer</button>
+            <button class="btn" id="clearBtn">Limpiar</button>
+          </div>
+        </div>
+
+        <div style="flex:1;min-width:220px">
+          <label for="outText">Salida (texto)</label>
+          <textarea id="outText" rows="6" placeholder="Aquí aparecerán los caracteres confirmados"></textarea>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button class="btn" id="copyOutBtn">Copiar</button>
+            <button class="btn" id="downloadOutBtn">Descargar salida</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  renderSimGrid();
+  attachSimHandlers();
+}
+
+function renderTranslatorPanel(){
+  panelArea.innerHTML = `
+    <div class="card">
+      <h2>Traductor (texto → braille visual)</h2>
+      <p class="small">Escribe texto y pulsa <strong>Traducir</strong>.</p>
+      <label for="textIn">Texto</label>
+      <textarea id="textIn" rows="4" placeholder="Escribe aquí..."></textarea>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button class="btn" id="translateBtn">Traducir</button>
+        <button class="btn" id="copyBrailleBtn">Copiar representación</button>
+        <button class="btn" id="downloadBrailleBtn">Descargar</button>
+      </div>
+      <div id="brailleOutput" class="braille-output" aria-live="polite" style="margin-top:12px"></div>
+    </div>
+  `;
+  attachTranslatorHandlers();
+}
+
+/* Render dots with improved visuals */
+function renderSimGrid(){
+  const grid = document.getElementById('simGrid');
+  grid.innerHTML = '';
+  for(let i=0;i<6;i++){
+    const btn = document.createElement('button');
+    btn.className = 'dot inactive';
+    btn.dataset.index = i;
+    btn.title = `Punto ${i+1}`;
+    btn.setAttribute('aria-pressed','false');
+    btn.setAttribute('tabindex','0');
+    btn.addEventListener('click', ()=>toggleDot(i));
+    btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggleDot(i); }});
+    grid.appendChild(btn);
+  }
+  updateSimDisplay();
+}
+
+function toggleDot(i){
+  pushHistory();
+  const bit = 1<<i;
+  simState.mask = (simState.mask & bit) ? (simState.mask & ~bit) : (simState.mask | bit);
+  simState.future = [];
+  updateSimDisplay();
+  announce(`Punto ${i+1} ${ (simState.mask & bit) ? 'activado' : 'desactivado' }`);
+}
+
+function updateSimDisplay(){
+  const dots = $$('#simGrid .dot');
+  dots.forEach(d=>{
+    const i = parseInt(d.dataset.index);
+    const active = !!(simState.mask & (1<<i));
+    d.classList.toggle('active', active);
+    d.classList.toggle('inactive', !active);
+    d.setAttribute('aria-pressed', String(!!active));
+  });
+}
+
+/* History / undo */
+function pushHistory(){
+  simState.history.push(simState.mask);
+  if(simState.history.length>200) simState.history.shift();
+}
+function undo(){
+  if(simState.history.length===0) return;
+  simState.future.push(simState.mask);
+  simState.mask = simState.history.pop();
+  updateSimDisplay();
+}
+
+/* Mask <-> char mapping */
+function maskToChar(mask){
+  for(const k in BRAILLE_MAP) if(BRAILLE_MAP[k]===mask) return k;
+  return '';
+}
+function charToMask(ch){
+  return BRAILLE_MAP[ch] ?? 0;
+}
+
+/* Simulator handlers */
+function attachSimHandlers(){
+  $('#confirmCharBtn').addEventListener('click', ()=>{
+    const ch = maskToChar(simState.mask) || '?';
+    const ta = $('#outText');
+    ta.value += ch;
+    pushHistory();
+    simState.mask = 0;
+    updateSimDisplay();
+    announce('Carácter añadido: '+ch);
+  });
+  $('#undoBtn').addEventListener('click', ()=>{ undo(); announce('Deshacer'); });
+  $('#readBtn').addEventListener('click', ()=>{ speak(maskToChar(simState.mask)||'patrón vacío'); });
+  $('#clearBtn').addEventListener('click', ()=>{ pushHistory(); simState.mask=0; updateSimDisplay(); announce('Limpieza'); });
+
+  $('#copyOutBtn').addEventListener('click', ()=>{
+    const t = $('#outText').value || '';
+    navigator.clipboard?.writeText(t).then(()=>announce('Copiado al portapapeles')).catch(()=>announce('No se pudo copiar'));
+  });
+  $('#downloadOutBtn').addEventListener('click', ()=>{ triggerDownloadFromContent($('#outText').value || '', 'txt'); });
+
+  // keyboard 1..6 and enter to confirm and Ctrl+Z to undo
+  window.addEventListener('keydown', simKeyHandler);
+}
+
+function simKeyHandler(e){
+  if(document.activeElement && (document.activeElement.tagName==='INPUT' || document.activeElement.tagName==='TEXTAREA')) return;
+  if(/^[1-6]$/.test(e.key)){
+    const i = parseInt(e.key)-1;
+    toggleDot(i);
+    e.preventDefault();
+  } else if(e.key==='Enter'){
+    const btn = $('#confirmCharBtn'); if(btn) btn.click();
+  } else if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='z'){
+    undo(); e.preventDefault();
+  }
+}
+
+/* Translator handlers + render visual cells */
+function attachTranslatorHandlers(){
+  $('#translateBtn').addEventListener('click', ()=>{
+    const t = $('#textIn').value || '';
+    const masks = Array.from(t.toLowerCase()).map(ch => charToMask(ch));
+    renderBrailleVisuals(masks, t);
+  });
+  $('#copyBrailleBtn').addEventListener('click', ()=>{
+    const text = $('#brailleOutput').textContent || '';
+    navigator.clipboard?.writeText(text).then(()=>announce('Representación copiada')).catch(()=>announce('No se pudo copiar'));
+  });
+  $('#downloadBrailleBtn').addEventListener('click', ()=>{
+    const t = $('#textIn').value || '';
+    triggerDownloadFromContent(t, 'txt');
+  });
+}
+
+function renderBrailleVisuals(masks, originalText=''){
+  const out = $('#brailleOutput');
+  out.innerHTML = '';
+  masks.forEach((m, idx)=>{
+    const cell = document.createElement('div');
+    cell.style.padding='8px';
+    cell.style.borderRadius='10px';
+    cell.style.border='1px solid rgba(255,255,255,0.03)';
+    cell.style.display='inline-block';
+    cell.style.marginRight='8px';
+    cell.style.background='linear-gradient(180deg, rgba(255,255,255,0.01), transparent)';
+    cell.innerHTML = renderCellHtml(m);
+    const label = document.createElement('div');
+    label.style.fontSize='12px';
+    label.style.color='var(--muted)';
+    label.style.textAlign='center';
+    label.style.marginTop = '6px';
+    label.textContent = originalText[idx] || '';
+    cell.appendChild(label);
+    out.appendChild(cell);
+  });
+  if(masks.length===0) out.textContent='(vacío)';
+  announce('Traducción completada');
+}
+
+function renderCellHtml(mask){
+  let html = '<div style="display:grid;grid-template-columns:repeat(2,18px);grid-gap:6px;margin-bottom:6px">';
+  for(let i=0;i<6;i++){
+    const active = !!(mask & (1<<i));
+    const color = active ? 'background: radial-gradient(circle at 30% 30%, #31c7c6 0%, var(--accent) 40%); box-shadow: 0 8px 18px rgba(6,160,160,0.28);' : 'background:#061418; opacity:0.45; box-shadow: inset 0 -4px 6px rgba(0,0,0,0.6);';
+    html += `<div style="width:18px;height:18px;border-radius:50%;${color}"></div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+/* Speech */
+function speak(text){
+  if('speechSynthesis' in window){
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'es-ES';
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+  } else announce('Síntesis de voz no disponible');
+}
+
+/* Simple download helper */
+function triggerBlobDownload(filename, content, mime='text/plain'){
+  const blob = new Blob([content], {type: mime + ';charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  alert('Descarga iniciada: ' + filename);
+}
+function triggerDownloadFromContent(content, format='txt'){
+  const name = prompt('Nombre de archivo', 'braille_output') || 'braille_output';
+  const ext = format==='txt' ? 'txt' : format; triggerBlobDownload(`${name}.${ext}`, content, 'text/plain');
+}
+
+/* Switch views */
+$('#viewSimulatorBtn').addEventListener('click', ()=>{
+  $('#viewSimulatorBtn').classList.add('active'); $('#viewTranslatorBtn').classList.remove('active');
+  $('#viewSimulatorBtn').setAttribute('aria-selected','true'); $('#viewTranslatorBtn').setAttribute('aria-selected','false');
+  renderSimulatorPanel();
+});
+$('#viewTranslatorBtn').addEventListener('click', ()=>{
+  $('#viewTranslatorBtn').classList.add('active'); $('#viewSimulatorBtn').classList.remove('active');
+  $('#viewTranslatorBtn').setAttribute('aria-selected','true'); $('#viewSimulatorBtn').setAttribute('aria-selected','false');
+  renderTranslatorPanel();
+});
+
+/* start with simulator */
+renderSimulatorPanel();
+
+/* minimal sr-only helper */
+(function addSrOnly(){
+  const s = document.createElement('style'); s.innerHTML = '.sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}'; document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
