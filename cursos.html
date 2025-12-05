@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plataforma de Cursos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Aquí enlazarías tu CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Script para mostrar la hora en vivo
+    function actualizarHora() {
+      const ahora = new Date();
+      document.getElementById("hora").textContent = ahora.toLocaleTimeString();
+    }
+    setInterval(actualizarHora, 1000);
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>📚 Cursos en Línea</h1>
+      <button id="modoOscuro">Modo Oscuro</button>
+      <div class="menu-accesibilidad">
+        <label for="accesibilidad">Accesibilidad:</label>
+        <select id="accesibilidad">
+          <option value="normal">Normal</option>
+          <option value="alto-contraste">Alto Contraste</option>
+          <option value="texto-grande">Texto Grande</option>
+        </select>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Propósito de esta sección</h2>
+      <p>En esta sección encontrarás cursos diseñados para aprender herramientas útiles de programación y automatización. El objetivo es brindar formación accesible y práctica.</p>
+    </section>
+
+    <section>
+      <h2>Curso disponible: AutoHotkey (AHK)</h2>
+      <details>
+        <summary>Descripción del curso</summary>
+        <p>Este curso te enseñará a automatizar tareas en Windows usando el lenguaje AutoHotkey.</p>
+      </details>
+      <details>
+        <summary>Descripción del lenguaje</summary>
+        <p>AutoHotkey es un lenguaje de scripting ligero que permite crear atajos, macros y automatizaciones.</p>
+      </details>
+      <details>
+        <summary>Tipo de impartición</summary>
+        <p>El curso será impartido en línea mediante esta misma plataforma, con materiales y ejemplos prácticos.</p>
+      </details>
+
+      <h3>Requisitos</h3>
+      <ul>
+        <li>Tener una computadora</li>
+        <li>Conexión a internet</li>
+        <li>Al menos 2 GB de RAM</li>
+        <li>1 GB de almacenamiento disponible</li>
+        <li>Un editor de texto</li>
+        <li>Sistema operativo Windows actualizado</li>
+        <li>Conocimientos básicos de informática</li>
+        <li>Cuenta de usuario en la plataforma</li>
+      </ul>
+<h3>entrar curso.</h3>
+<a href="cursoahk">ir al curso</a>      
+
+
+  </main>
+
+  <aside>
+    <p>🕒 Hora actual: <span id="hora"></span></p>
+  </aside>
+
+  <footer>
+    <p>Contenido bajo licencia Creative Commons 4.0 (CC BY-ND). Puedes distribuirlo sin cambios.</p>
+  </footer>
+</body>
+</html>
