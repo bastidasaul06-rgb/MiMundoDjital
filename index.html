@@ -187,14 +187,14 @@
           <a href="SimuladorBralle.html" class="btn-secondary">Acceder al simulador</a>
         </article>
 
-        <article data-category="académico" data-keywords="educación, derecho, políticas, escolar, derechos">
+        <article data-category="escolares" data-keywords="educación, derecho, políticas, escolar, derechos">
           <h3>Derecho a la Educación</h3>
-          <span class="category-badge">Académico</span>
+          <span class="category-badge">Escolares</span>
           <p>Publicación sobre las políticas del derecho a la educación.</p>
           <a href="publicasiondepotcas.html" class="btn-secondary">Leer artículo</a>
         </article>
 
-        <article data-category="programación" data-keywords="github, control de versiones, desarrollo, colaborativo, git, software">
+        <article data-category="programacion" data-keywords="github, control de versiones, desarrollo, colaborativo, git, software">
           <h3>🌐 Publicación sobre GitHub</h3>
           <span class="category-badge">Programación</span>
           <p>Aprende sobre control de versiones y desarrollo colaborativo.</p>
@@ -215,9 +215,9 @@
           <a href="PrimerPublicasion.html" class="btn-secondary" target="_blank" rel="noopener noreferrer">Leer artículo</a>
         </article>
 
-        <article data-category="educación" data-keywords="cursos, aprendizaje, educación, recursos, formación, enseñanza">
+        <article data-category="escolares" data-keywords="cursos, aprendizaje, educación, recursos, formación, enseñanza">
           <h3>📚 Cursos</h3>
-          <span class="category-badge">Educación</span>
+          <span class="category-badge">Escolares</span>
           <p>Accede a recursos y cursos útiles para aprender.</p>
           <a href="cursos.html" class="btn-secondary">Ver cursos</a>
         </article>
@@ -266,32 +266,32 @@
       {
         titulo: 'Derecho a la Educación',
         url: 'publicasiondepotcas.html',
-        categoria: 'académico',
-        palabrasClave: ['educación', 'derecho', 'políticas', 'escolar', 'derechos', 'acceso']
+        categoria: 'escolares',
+        palabrasClave: ['educacion', 'derecho', 'politicas', 'escolar', 'derechos', 'acceso']
       },
       {
         titulo: 'Publicación sobre GitHub',
         url: 'dominio.html',
-        categoria: 'programación',
-        palabrasClave: ['github', 'control', 'versiones', 'desarrollo', 'colaborativo', 'git', 'software', 'código']
+        categoria: 'programacion',
+        palabrasClave: ['github', 'control', 'versiones', 'desarrollo', 'colaborativo', 'git', 'software', 'codigo']
       },
       {
         titulo: 'Área de Juegos',
         url: 'PublicasionAreaDeJuegos.html',
         categoria: 'entretenimiento',
-        palabrasClave: ['juegos', 'games', 'interactivo', 'diversión', 'entretenimiento', 'gaming', 'divertido']
+        palabrasClave: ['juegos', 'games', 'interactivo', 'diversion', 'entretenimiento', 'gaming', 'divertido']
       },
       {
         titulo: 'Mi Primera Publicación',
         url: 'PrimerPublicasion.html',
         categoria: 'general',
-        palabrasClave: ['primera', 'publicación', 'inicio', 'bienvenida', 'artículo', 'primer']
+        palabrasClave: ['primera', 'publicacion', 'inicio', 'bienvenida', 'articulo', 'primer']
       },
       {
         titulo: 'Cursos',
         url: 'cursos.html',
-        categoria: 'educación',
-        palabrasClave: ['cursos', 'aprendizaje', 'educación', 'recursos', 'formación', 'enseñanza', 'clases']
+        categoria: 'escolares',
+        palabrasClave: ['cursos', 'aprendizaje', 'educacion', 'recursos', 'formacion', 'ensenanza', 'clases']
       }
     ];
 
@@ -450,6 +450,27 @@
     document.addEventListener('DOMContentLoaded', function() {
       updateTime();
     });
+
+    // ===============================================
+    // OCULTAR / ENCoger LOGO AL HACER SCROLL
+    // ===============================================
+    (function() {
+      const headerEl = document.querySelector('header');
+      const SCROLL_THRESHOLD = 100; // px, cambiar si se desea
+
+      function onScrollHeader() {
+        const sc = window.scrollY || window.pageYOffset;
+        if (sc > SCROLL_THRESHOLD) {
+          headerEl.classList.add('header-compact');
+        } else {
+          headerEl.classList.remove('header-compact');
+        }
+      }
+
+      window.addEventListener('scroll', onScrollHeader, { passive: true });
+      // Evaluar al cargar para estado inicial
+      onScrollHeader();
+    })();
   </script>
 
 </body>

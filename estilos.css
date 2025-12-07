@@ -136,6 +136,38 @@ header {
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* ===============================================
+   HEADER COMPACTO - ocultar/encoger logo al hacer scroll
+   =============================================== */
+
+header.header-compact {
+  padding: calc(var(--lg) / 2) var(--md);
+}
+
+/* cuando el header esté en modo compacto, encogemos y ocultamos visualmente el logo */
+header.header-compact .logo-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+header.header-compact .logo {
+  transform: translateY(-120%) scale(0.45);
+  opacity: 0;
+  width: 64px;
+  height: 64px;
+  border-width: 3px;
+  transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s, height 0.35s;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  header.header-compact .logo {
+    width: 48px;
+    height: 48px;
+  }
+}
+
 /* Navegación */
 nav[role="navigation"] {
   margin: var(--md) 0 0;
