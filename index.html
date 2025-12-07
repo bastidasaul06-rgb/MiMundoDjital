@@ -1,60 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Meta Tags Esenciales -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pájina personál de Saúl</title>
+  <meta name="description" content="Página personal de Saúl. Músico, programador y estudiante ciego. Explora mis habilidades, publicaciones y proyectos.">
+  <meta name="keywords" content="Saúl, música, programación, ciego, accesibilidad, blog">
+  <meta name="author" content="Saúl">
+  
+  <!-- Open Graph para redes sociales -->
+  <meta property="og:title" content="Página personal de Saúl - Músico y Programador">
+  <meta property="og:description" content="Explora los proyectos y habilidades de Saúl, un músico, programador y estudiante ciego.">
+  <meta property="og:type" content="website">
+  
+  <!-- Title -->
+  <title>Saúl | Músico, Programador y Estudiante</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="una guitarra acústic.png">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="estilos.css">
+  
+  <!-- Preconectar a recursos externos -->
+  <link rel="preconnect" href="https://creativecommons.org">
 </head>
 <body>
-<h1>inisio</h1>
-  <header>
-    <div class="hora" id="horaActual"></div>
-    <img src="una guitarra acústic.png" alt="Logo de la página" width="200" height="200" style="display:block; margin: 0 auto;">
+  <!-- Skip Link para accesibilidad -->
+  <a href="#main-content" class="skip-link">Ir al contenido principal</a>
 
-    <nav>
-      <ul style="text-align:center; list-style:none; padding:0; margin-top:20px;">
-        <li style="display:inline; margin:0 10px;"><a href="#habilidades">Habilidades</a></li>
-        <li style="display:inline; margin:0 10px;"><a href="#cambios">Cambios recientes</a></li>
-        <li style="display:inline; margin:0 10px;"><a href="#blog">Blog</a></li>
-        <li style="display:inline; margin:0 10px;"><a href="#contenido">Contenido</a></li>
-        <li style="display:inline; margin:0 10px;"><a href="#publicaciones">Publicaciones</a></li>
+  <!-- Encabezado Principal -->
+  <header role="banner" aria-label="Encabezado de la página">
+    <!-- Hora actual -->
+    <div class="hora-container" aria-live="polite" aria-label="Hora actual">
+      <time id="horaActual">Cargando hora...</time>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img 
+        src="una guitarra acústic.png" 
+        alt="Logo de guitarra acústica - Página de Saúl" 
+        class="logo" 
+        width="200" 
+        height="200">
+    </div>
+
+    <!-- Navegación Principal -->
+    <nav role="navigation" aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#cambios">Cambios Recientes</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contenido">Contenido</a></li>
+        <li><a href="#publicaciones">Publicaciones</a></li>
       </ul>
     </nav>
+
+    <!-- Controles de Accesibilidad -->
+    <div class="accessibility-controls" role="region" aria-label="Controles de accesibilidad">
+      <button 
+        id="toggleAccessibility" 
+        class="btn-accessibility" 
+        aria-expanded="false"
+        aria-controls="accessibilityMenu">
+        ⚙️ Accesibilidad
+      </button>
+      <div id="accessibilityMenu" class="accessibility-menu" hidden>
+        <button id="btnIncrease" class="btn-small" aria-label="Aumentar tamaño de texto">Aumentar +</button>
+        <button id="btnDecrease" class="btn-small" aria-label="Disminuir tamaño de texto">Disminuir −</button>
+        <button id="btnReset" class="btn-small" aria-label="Restablecer tamaño de texto">Restablecer</button>
+        <button id="btnContrast" class="btn-small" aria-label="Alternar alto contraste">Alto Contraste</button>
+        <button id="btnDarkMode" class="btn-small" aria-label="Cambiar modo claro/oscuro">Modo Oscuro</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <div class="accesibilidad-container" style="margin-top: 30px; text-align: center;">
-        <button class="accesibilidad-toggle" onclick="toggleAccesibilidad()">Accesibilidad</button>
-        <div class="accesibilidad-menu" id="accesibilidadMenu" style="display: none; margin-top: 10px;">
-          <button onclick="aumentarTexto()">Aumentar texto</button>
-          <button onclick="disminuirTexto()">Disminuir texto</button>
-          <button onclick="restablecerTexto()">Restablecer tamaño</button>
-          <button onclick="alternarContraste()">Alto contraste</button>
-        </div>
-      </div>
+  <!-- Contenido Principal -->
+  <main id="main-content" role="main">
+    
+    <!-- Sección Hero / Bienvenida -->
+    <section id="hero" class="hero-section" aria-labelledby="main-title">
+      <h1 id="main-title">Bienvenido a Mi Espacio Digital</h1>
+      <p class="lead">
+        Soy músico, programador y estudiante ciego. Me gusta crear cosas, ya sea con sonidos o con líneas de código. 
+        A veces compongo, otras veces escribo programas, y muchas veces hago las dos cosas al mismo tiempo. 
+        Me gusta aprender, experimentar y compartir lo que voy descubriendo en el camino.
+      </p>
     </section>
 
-    <section>
-      <h1>bien¡benidos!</h1>
-      <p>Soy músico, programador y estudiante ciego. Me gusta crear cosas, ya sea con sonidos o con líneas de código. A veces compongo, otras veces escribo programas, y muchas veces hago las dos cosas al mismo tiempo. Me gusta aprender, experimentar y compartir lo que voy descubriendo en el camino: Este espacio es un poco de todo eso.</p>
-    </section>
-
-    <section id="habilidades">
-      <h2>Mis habilidades por área</h2>
-      <table border="1" style="width:100%; text-align:center; border-collapse: collapse; margin-top:20px;">
+    <!-- Sección Habilidades -->
+    <section id="habilidades" aria-labelledby="skills-title">
+      <h2 id="skills-title">Mis Habilidades por Área</h2>
+      <table class="skills-table">
+        <caption>Tabla de habilidades técnicas y musicales</caption>
         <thead>
           <tr>
-            <th>Área</th>
-            <th>Herramientas / Habilidades</th>
-            <th>Nivel</th>
+            <th scope="col">Área</th>
+            <th scope="col">Herramientas / Habilidades</th>
+            <th scope="col">Nivel</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Música</td>
-            <td>Guitarra acústica, composición, grabación y produción musical</td>
+            <td>Guitarra acústica, composición, grabación y producción musical</td>
             <td>Avanzado</td>
           </tr>
           <tr>
@@ -63,7 +113,7 @@
             <td>Intermedio</td>
           </tr>
           <tr>
-            <td>Escolares</td>
+            <td>Académico</td>
             <td>Lectura en braille, investigación, redacción</td>
             <td>Avanzado</td>
           </tr>
@@ -71,133 +121,336 @@
       </table>
     </section>
 
-    <section id="cambios">
-      <h2>Cambios resientes en la pájina</h2>
-      <a href="cambios-resientes.html" target="_blank" rel="noopener noreferrer">Ver cambios recientes</a>
+    <!-- Sección Cambios Recientes -->
+    <section id="cambios" aria-labelledby="recent-title">
+      <h2 id="recent-title">Cambios Recientes en la Página</h2>
+      <p>Aquí encontrarás todas las actualizaciones y cambios realizados en el sitio.</p>
+      <a href="cambios-resientes.html" class="btn-primary" target="_blank" rel="noopener noreferrer">
+        Ver cambios recientes
+      </a>
     </section>
 
-    <section id="blog">
-      <h2>Blog</h2>
-      <a href="blog.html" target="_blank" rel="noopener noreferrer">Ir al blog</a>
+    <!-- Sección Blog -->
+    <section id="blog" aria-labelledby="blog-title">
+      <h2 id="blog-title">Blog</h2>
+      <p>Lee mis artículos y reflexiones sobre música, programación y accesibilidad.</p>
+      <a href="blog.html" class="btn-primary" target="_blank" rel="noopener noreferrer">
+        Ir al blog
+      </a>
     </section>
 
-    <section id="contenido">
-      <h3>Contenido</h3>
-      <p>Más abajo encontrarás un menú para filtrar por categoría el contenido que vaya subiendo.</p>
+    <!-- Sección Contenido -->
+    <section id="contenido" aria-labelledby="content-title">
+      <h2 id="content-title">Contenido</h2>
+      <p>Filtra por categoría o busca por palabras clave para encontrar lo que te interesa.</p>
 
-      <div class="menu-container">
-        <label for="filtro">Filtrar por categoría:</label>
-        <select id="filtro" name="filtro">
+      <!-- Filtro por categoría -->
+      <div class="filter-section">
+        <label for="filterCategory">Filtrar por categoría:</label>
+        <select id="filterCategory" aria-label="Filtrar contenido por categoría">
           <option value="">-- Selecciona una opción --</option>
           <option value="musica">🎵 Música</option>
           <option value="programacion">💻 Programación</option>
-          <option value="escolares">📚 Escolares</option>
+          <option value="escolares">📚 Académico</option>
           <option value="arte">🎨 Arte</option>
           <option value="otros">✨ Otros</option>
         </select>
       </div>
 
-      <p>O si lo prefieres:<br>Busca por palabras clave aquí.</p>
-      <div class="buscador">
-        <label for="buscar">Buscar publicaciones:</label><br>
-        <input type="text" id="buscar" name="buscar" placeholder="Escribe palabras clave..." aria-label="Buscar publicaciones"><br><br>
-        <button id="btnBuscar">Buscar</button>
+      <!-- Buscador -->
+      <div class="search-section">
+        <label for="searchInput">Buscar publicaciones:</label>
+        <div class="search-box">
+          <input 
+            type="search" 
+            id="searchInput" 
+            placeholder="Escribe palabras clave..." 
+            aria-label="Buscar en publicaciones"
+            autocomplete="off">
+          <button id="btnSearch" class="btn-primary" aria-label="Ejecutar búsqueda">Buscar</button>
+        </div>
       </div>
 
-      <div id="resultados" style="margin-top: 20px;"></div>
+      <!-- Resultados de búsqueda -->
+      <div id="searchResults" class="search-results" role="region" aria-live="polite" aria-label="Resultados de búsqueda"></div>
     </section>
 
-    <section id="publicaciones">
-      <h3>Publicaciones</h3>
-      <ul>
-        <li></li>
-        <li><a href="SimuladorBralle.html">¡prueba este sinulador braille!</a></li>
-        <li><a href="publicasiondepotcas.html">ira la publicasión dek potcas del derecho a la educasión. </a>  </li>
-<li><a href="dominio.html" target="_blank" rel="noopener noreferrer">🌐 Leer publicación sobre GitHub</a></li>
-        <li><a href="PublicasionAreaDeJuegos.html" target="_blank" rel="noopener noreferrer">🎮 Leer la publicación sobre juegos</a></li>
-        <li><a href="PrimerPublicasion.html" target="_blank" rel="noopener noreferrer">📖 Leer mi primera publicación</a></li>
-        
-      </ul>
-      <h3>cursos</h3>
-      <a href="cursos.html">da un bistaso a estos cursos </a>
+    <!-- Sección Publicaciones -->
+    <section id="publicaciones" aria-labelledby="publications-title">
+      <h2 id="publications-title">Publicaciones</h2>
+      
+      <div class="publications-container">
+        <article data-category="otros" data-keywords="braille, simulador, accesibilidad, interactivo, herramienta">
+          <h3>Simulador Braille</h3>
+          <span class="category-badge">Otros</span>
+          <p>Prueba este simulador interactivo del sistema braille.</p>
+          <a href="SimuladorBralle.html" class="btn-secondary">Acceder al simulador</a>
+        </article>
+
+        <article data-category="académico" data-keywords="educación, derecho, políticas, escolar, derechos">
+          <h3>Derecho a la Educación</h3>
+          <span class="category-badge">Académico</span>
+          <p>Publicación sobre las políticas del derecho a la educación.</p>
+          <a href="publicasiondepotcas.html" class="btn-secondary">Leer artículo</a>
+        </article>
+
+        <article data-category="programación" data-keywords="github, control de versiones, desarrollo, colaborativo, git, software">
+          <h3>🌐 Publicación sobre GitHub</h3>
+          <span class="category-badge">Programación</span>
+          <p>Aprende sobre control de versiones y desarrollo colaborativo.</p>
+          <a href="dominio.html" class="btn-secondary" target="_blank" rel="noopener noreferrer">Leer artículo</a>
+        </article>
+
+        <article data-category="entretenimiento" data-keywords="juegos, games, interactivo, diversión, entretenimiento, gaming">
+          <h3>🎮 Área de Juegos</h3>
+          <span class="category-badge">Entretenimiento</span>
+          <p>Explora juegos y proyectos interactivos.</p>
+          <a href="PublicasionAreaDeJuegos.html" class="btn-secondary" target="_blank" rel="noopener noreferrer">Ir a juegos</a>
+        </article>
+
+        <article data-category="general" data-keywords="primera, publicación, inicio, bienvenida, artículo">
+          <h3>📖 Mi Primera Publicación</h3>
+          <span class="category-badge">General</span>
+          <p>Lee mi primer artículo en este sitio.</p>
+          <a href="PrimerPublicasion.html" class="btn-secondary" target="_blank" rel="noopener noreferrer">Leer artículo</a>
+        </article>
+
+        <article data-category="educación" data-keywords="cursos, aprendizaje, educación, recursos, formación, enseñanza">
+          <h3>📚 Cursos</h3>
+          <span class="category-badge">Educación</span>
+          <p>Accede a recursos y cursos útiles para aprender.</p>
+          <a href="cursos.html" class="btn-secondary">Ver cursos</a>
+        </article>
+      </div>
     </section>
+
   </main>
 
-  <button class="modo-btn" onclick="cambiarModo()">Cambiar modo claro/oscuro</button>
-
-  <footer>
-    <h4>Página Saúl</h4>
-    <p>© 2025 Página Saúl. Todos los contenidos están protegidos por la licencia 
-      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
-        Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional
-      </a>.
-      Puedes compartir el contenido siempre que se reconozca la autoría, no se utilice con fines comerciales y no se modifique ni mezcle.
-    </p>
-    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank" rel="noopener noreferrer">
-      Ver términos de la licencia Creative Commons BY-NC-ND 4.0
-    </a>
+  <!-- Pie de Página -->
+  <footer role="contentinfo" aria-label="Pie de página">
+    <div class="footer-content">
+      <h2>Saúl | Músico y Programador</h2>
+      <p>
+        © 2025 Página de Saúl. Todos los contenidos están protegidos por la licencia 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional">
+          Creative Commons BY-NC-ND 4.0
+        </a>.
+      </p>
+      <p class="license-description">
+        Puedes compartir el contenido siempre que reconozcas la autoría, no lo utilices con fines comerciales y no lo modifiques.
+      </p>
+    </div>
   </footer>
 
+  <!-- Script -->
   <script>
-    let tamañoActual = 1;
+    // ===============================================
+    // VARIABLES GLOBALES
+    // ===============================================
+    let fontSizeMultiplier = 1;
+    let horaAnunciada = false;
 
-    function toggleAccesibilidad() {
-      const menu = document.getElementById("accesibilidadMenu");
-      menu.style.display = menu.style.display === "none" ? "block" : "none";
-    }
-
-    function aumentarTexto() {
-      tamañoActual += 0.1;
-      document.body.style.fontSize = tamañoActual + "em";
-    }
-
-    function disminuirTexto() {
-      tamañoActual = Math.max(0.5, tamañoActual - 0.1);
-      document.body.style.fontSize = tamañoActual + "em";
-    }
-
-    function restablecerTexto() {
-      tamañoActual = 1;
-      document.body.style.fontSize = "1em";
-    }
-
-    function alternarContraste() {
-      document.body.classList.toggle("alto-contraste");
-    }
-
-    function mostrarHora() {
-      const ahora = new Date();
-      const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById('horaActual').textContent = 'Hora actual: ' + hora;
-    }
-
-    setInterval(mostrarHora, 1000);
-    mostrarHora();
-
-    function cambiarModo() {
-      document.body.classList.toggle('oscuro');
-    }
-
-    document.getElementById("btnBuscar").addEventListener("click", function () {
-      const palabraClave = document.getElementById("buscar").value.toLowerCase();
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "";
-
-      if (palabraClave.includes("juego")) {
-        resultados.innerHTML += '<p><a href="PublicasionAreaDeJuegos.html" target="_blank">Publicación sobre juegos</a></p>';
+    // ===============================================
+    // OBJETO DE CONFIGURACIÓN - PUBLICACIONES
+    // ===============================================
+    const publicaciones = [
+      {
+        titulo: 'Simulador Braille',
+        url: 'SimuladorBralle.html',
+        categoria: 'otros',
+        palabrasClave: ['braille', 'simulador', 'accesibilidad', 'interactivo', 'herramienta', 'sistema']
+      },
+      {
+        titulo: 'Derecho a la Educación',
+        url: 'publicasiondepotcas.html',
+        categoria: 'académico',
+        palabrasClave: ['educación', 'derecho', 'políticas', 'escolar', 'derechos', 'acceso']
+      },
+      {
+        titulo: 'Publicación sobre GitHub',
+        url: 'dominio.html',
+        categoria: 'programación',
+        palabrasClave: ['github', 'control', 'versiones', 'desarrollo', 'colaborativo', 'git', 'software', 'código']
+      },
+      {
+        titulo: 'Área de Juegos',
+        url: 'PublicasionAreaDeJuegos.html',
+        categoria: 'entretenimiento',
+        palabrasClave: ['juegos', 'games', 'interactivo', 'diversión', 'entretenimiento', 'gaming', 'divertido']
+      },
+      {
+        titulo: 'Mi Primera Publicación',
+        url: 'PrimerPublicasion.html',
+        categoria: 'general',
+        palabrasClave: ['primera', 'publicación', 'inicio', 'bienvenida', 'artículo', 'primer']
+      },
+      {
+        titulo: 'Cursos',
+        url: 'cursos.html',
+        categoria: 'educación',
+        palabrasClave: ['cursos', 'aprendizaje', 'educación', 'recursos', 'formación', 'enseñanza', 'clases']
       }
-      if (palabraClave.includes("primera")) {
-        resultados.innerHTML += '<p><a href="PrimerPublicasion.html" target="_blank">Primera publicación</a></p>';
+    ];
+
+    // ===============================================
+    // UTILIDADES DEL DOM
+    // ===============================================
+    const DOM = {
+      toggleAccessibility: document.getElementById('toggleAccessibility'),
+      accessibilityMenu: document.getElementById('accessibilityMenu'),
+      btnIncrease: document.getElementById('btnIncrease'),
+      btnDecrease: document.getElementById('btnDecrease'),
+      btnReset: document.getElementById('btnReset'),
+      btnContrast: document.getElementById('btnContrast'),
+      btnDarkMode: document.getElementById('btnDarkMode'),
+      horaActual: document.getElementById('horaActual'),
+      btnSearch: document.getElementById('btnSearch'),
+      searchInput: document.getElementById('searchInput'),
+      searchResults: document.getElementById('searchResults'),
+      filterCategory: document.getElementById('filterCategory'),
+    };
+
+    // ===============================================
+    // FUNCIONES DE ACCESIBILIDAD - MENÚ
+    // ===============================================
+    DOM.toggleAccessibility.addEventListener('click', function() {
+      const isHidden = DOM.accessibilityMenu.hasAttribute('hidden');
+      if (isHidden) {
+        DOM.accessibilityMenu.removeAttribute('hidden');
+        this.setAttribute('aria-expanded', 'true');
+      } else {
+        DOM.accessibilityMenu.setAttribute('hidden', '');
+        this.setAttribute('aria-expanded', 'false');
       }
-      if (palabraClave.includes("github")) {
-        resultados.innerHTML += '<p><a href="PublicasionGitHub.html" target="_blank">Publicación sobre GitHub</a></p>';
+    });
+
+    // ===============================================
+    // FUNCIONES DE ACCESIBILIDAD - TAMAÑO DE TEXTO
+    // ===============================================
+    DOM.btnIncrease.addEventListener('click', function() {
+      fontSizeMultiplier = Math.min(2, fontSizeMultiplier + 0.1);
+      document.documentElement.style.fontSize = (16 * fontSizeMultiplier) + 'px';
+    });
+
+    DOM.btnDecrease.addEventListener('click', function() {
+      fontSizeMultiplier = Math.max(0.8, fontSizeMultiplier - 0.1);
+      document.documentElement.style.fontSize = (16 * fontSizeMultiplier) + 'px';
+    });
+
+    DOM.btnReset.addEventListener('click', function() {
+      fontSizeMultiplier = 1;
+      document.documentElement.style.fontSize = '16px';
+    });
+
+    // ===============================================
+    // FUNCIONES DE ACCESIBILIDAD - CONTRASTE Y MODO
+    // ===============================================
+    DOM.btnContrast.addEventListener('click', function() {
+      document.body.classList.toggle('high-contrast');
+    });
+
+    DOM.btnDarkMode.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // ===============================================
+    // FUNCIÓN DE HORA - SOLO MUESTRA, NO ANUNCIA
+    // ===============================================
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('es-MX', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+      });
+      DOM.horaActual.textContent = 'Hora actual: ' + timeString;
+    }
+
+    // Actualizar hora solo una vez al cargar y cada 10 segundos (no cada segundo)
+    updateTime();
+    setInterval(updateTime, 10000);
+
+    // ===============================================
+    // FUNCIÓN DE BÚSQUEDA - MEJORADA
+    // ===============================================
+    function performSearch() {
+      const keyword = DOM.searchInput.value.toLowerCase().trim();
+      const category = DOM.filterCategory.value;
+      DOM.searchResults.innerHTML = '';
+
+      // Validación: si no hay búsqueda y no hay categoría seleccionada
+      if (!keyword && !category) {
+        DOM.searchResults.innerHTML = '<p class="no-results">Ingresa una palabra clave o selecciona una categoría para buscar.</p>';
+        return;
       }
-            if (resultados.innerHTML === "") {
-        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+
+      // Filtrar publicaciones
+      const resultados = publicaciones.filter(pub => {
+        // Verificar categoría
+        const coincideCategoria = !category || pub.categoria === category;
+
+        // Verificar palabras clave
+        let coincideBusqueda = true;
+        if (keyword) {
+          coincideBusqueda = pub.palabrasClave.some(palabra => palabra.includes(keyword));
+        }
+
+        return coincideCategoria && coincideBusqueda;
+      });
+
+      // Mostrar resultados
+      if (resultados.length === 0) {
+        DOM.searchResults.innerHTML = `<p class="no-results">No se encontraron publicaciones con tu búsqueda "${keyword}" ${category ? 'en la categoría: ' + category : ''}.</p>`;
+        return;
       }
+
+      DOM.searchResults.innerHTML = '';
+      resultados.forEach(pub => {
+        const resultHTML = `
+          <article class="search-result">
+            <h4>${pub.titulo}</h4>
+            <span class="category-badge">${pub.categoria.charAt(0).toUpperCase() + pub.categoria.slice(1)}</span>
+            <p>Categoría: <strong>${pub.categoria}</strong></p>
+            <a href="${pub.url}" class="btn-secondary" ${pub.url.includes('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}>Ir a la publicación</a>
+          </article>
+        `;
+        DOM.searchResults.innerHTML += resultHTML;
+      });
+
+      // Anunciar a lectores de pantalla
+      const mensaje = `Se encontraron ${resultados.length} publicación${resultados.length !== 1 ? 'es' : ''}`;
+      const announcement = document.createElement('div');
+      announcement.setAttribute('role', 'status');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.classList.add('visually-hidden');
+      announcement.textContent = mensaje;
+      DOM.searchResults.prepend(announcement);
+    }
+
+    // ===============================================
+    // EVENT LISTENERS - BÚSQUEDA
+    // ===============================================
+    DOM.btnSearch.addEventListener('click', performSearch);
+
+    DOM.searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    // Buscar también cuando cambie la categoría
+    DOM.filterCategory.addEventListener('change', performSearch);
+
+    // ===============================================
+    // MOSTRAR HORA AL CARGAR
+    // ===============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTime();
     });
   </script>
 
-  
 </body>
 </html>

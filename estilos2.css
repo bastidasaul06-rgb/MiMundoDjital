@@ -1,0 +1,16 @@
+h1 {
+  font-weight: bold;
+}
+.semtrado{
+ text-align:justify ;   
+ color: gray;
+background-color: aquamarine; 
+border: 2px solidb  lack;
+border-radius: 10px;
+padding: 10px;
+
+}
+#resaltado{
+    text-decoration: underline;
+    font-weight:bold ;
+}
