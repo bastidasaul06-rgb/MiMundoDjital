@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Publicasion - El sitio ya está en GitHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 20px; transition: background-color 0.3s, color 0.3s; }
+    .hora { font-size: 1.2em; font-weight: bold; text-align: center; margin-bottom: 30px; }
+    .modo-btn { display:block; margin:20px auto; padding:10px 20px; font-size:1em; border-radius:6px; border:none; background:#00796b; color:white; cursor:pointer; }
+    .modo-btn:hover { background:#004d40; }
+    .oscuro { background:#121212; color:#f0f0f0; }
+    .oscuro .modo-btn { background:#f0f0f0; color:#121212; }
+    .oscuro .modo-btn:hover { background:#ccc; }
+    .accesibilidad-toggle { padding:10px 20px; font-size:1em; border-radius:6px; border:none; background:#00796b; color:white; cursor:pointer; }
+    .accesibilidad-menu button { display:block; margin:10px auto; padding:8px 16px; font-size:0.9em; border-radius:5px; border:none; background:#e0e0e0; cursor:pointer; }
+    .alto-contraste { background:black !important; color:yellow !important; }
+    body.alto-contraste a { color:cyan !important; }
+    h1 { color:#00796b; text-align:center; }
+    h2 { margin-top:25px; color:#004d40; }
+    p { margin-top:15px; line-height:1.6; }
+  </style>
+</head>
+<body>
+
+  <div class="hora" id="horaActual"></div>
+
+  <div class="accesibilidad-container" style="text-align:center;">
+    <button class="accesibilidad-toggle" onclick="toggleAccesibilidad()">Accesibilidad</button>
+    <div class="accesibilidad-menu" id="accesibilidadMenu" style="display:none; margin-top:10px;">
+      <button onclick="aumentarTexto()">Aumentar texto</button>
+      <button onclick="disminuirTexto()">Disminuir texto</button>
+      <button onclick="restablecerTexto()">Restablecer tamaño</button>
+      <button onclick="alternarContraste()">Alto contraste</button>
+    </div>
+  </div>
+
+  <h1>¡El sitio ya está en GitHub!</h1>
+
+  <p>Estoy muy contento de contarles que el sitio ya está disponible en GitHub. Dejamos atrás el dominio anterior y ahora todo está en este nuevo espacio. Es un paso importante porque me permite organizar mejor el código, compartirlo con más personas y seguir creciendo.</p>
+
+  <h2>¿Por qué es especial?</h2>
+  <p>GitHub me da la oportunidad de tener un control más claro de los cambios, trabajar con versiones y recibir aportes de otros. Además, me emociona saber que cualquiera puede ver cómo está hecho el sitio y aprender de él.</p>
+
+  <h2>Lo que viene</h2>
+  <p>Con este cambio, planeo seguir agregando nuevas funciones, juegos y publicaciones. También quiero aprovechar las herramientas de GitHub para mantener todo más ordenado y seguro. Es como estrenar casa nueva, y estoy feliz de que el sitio tenga este nuevo hogar.</p>
+
+  <h2>Gracias</h2>
+  <p>Gracias por acompañarme en este proceso. Cada paso que doy con la página me motiva más, y ahora con GitHub siento que todo está listo para crecer mucho más.</p>
+
+  <button class="modo-btn" onclick="cambiarModo()">Cambiar modo claro/oscuro</button>
+
+  <footer style="background:#f2f2f2; padding:20px; text-align:center; font-size:14px;">
+    <h4>Página Saúl</h4>
+    <p>© 2025 Página Saúl. Todos los contenidos están protegidos por la licencia 
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_MX" target="_blank">Creative Commons BY-NC-ND 4.0</a>.
+      Puedes compartir el contenido siempre que se reconozca la autoría, no se utilice con fines comerciales y no se modifique ni mezcle.
+    </p>
+  </footer>
+
+  <script>
+    let tamañoActual = 1;
+    function toggleAccesibilidad(){const m=document.getElementById("accesibilidadMenu");m.style.display=m.style.display==="none"?"block":"none";}
+    function aumentarTexto(){tamañoActual+=0.1;document.body.style.fontSize=tamañoActual+"em";}
+    function disminuirTexto(){tamañoActual=Math.max(0.5,tamañoActual-0.1);document.body.style.fontSize=tamañoActual+"em";}
+    function restablecerTexto(){tamañoActual=1;document.body.style.fontSize="1em";}
+    function alternarContraste(){document.body.classList.toggle("alto-contraste");}
+    function mostrarHora(){const a=new Date();const h=a.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',second:'2-digit'});document.getElementById('horaActual').textContent='Hora actual: '+h;}
+    setInterval(mostrarHora,1000);mostrarHora();
+    function cambiarModo(){document.body.classList.toggle('oscuro');}
+  </script>
+
+</body>
+</html>
